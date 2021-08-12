@@ -14,7 +14,6 @@ namespace Mimmi20Test\NavigationHelper\ConvertToPages;
 
 use Laminas\Config\Config;
 use Laminas\Log\Logger;
-use Laminas\Navigation\Page\AbstractPage;
 use Mezzio\Navigation\Exception\InvalidArgumentException;
 use Mezzio\Navigation\Navigation;
 use Mezzio\Navigation\Page\PageFactoryInterface;
@@ -250,7 +249,7 @@ final class ConvertToPagesTest extends TestCase
 
         [$page] = $helper->convert($uri);
 
-        self::assertInstanceOf(AbstractPage::class, $page);
+        self::assertInstanceOf(\Laminas\Navigation\Page\Uri::class, $page);
     }
 
     /**
@@ -258,7 +257,7 @@ final class ConvertToPagesTest extends TestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
      */
-    public function testConvertFromStringWithException2(): void
+    public function testConvertFromString3(): void
     {
         $logger = $this->getMockBuilder(Logger::class)
             ->disableOriginalConstructor()
@@ -286,7 +285,7 @@ final class ConvertToPagesTest extends TestCase
 
         [$page] = $helper->convert($uri);
 
-        self::assertInstanceOf(AbstractPage::class, $page);
+        self::assertInstanceOf(\Laminas\Navigation\Page\Uri::class, $page);
     }
 
     /**
@@ -533,6 +532,89 @@ final class ConvertToPagesTest extends TestCase
         self::assertSame([], $helper->convert($config));
         self::assertSame([], $helper->convert($config, true));
         self::assertSame([], $helper->convert($config, false));
+    }
+
+    /**
+     * @throws Exception
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     */
+    public function testConvertFromArray2(): void
+    {
+        $logger = $this->getMockBuilder(Logger::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $logger->expects(self::never())
+            ->method('emerg');
+        $logger->expects(self::never())
+            ->method('alert');
+        $logger->expects(self::never())
+            ->method('crit');
+        $logger->expects(self::never())
+            ->method('err');
+        $logger->expects(self::never())
+            ->method('warn');
+        $logger->expects(self::never())
+            ->method('notice');
+        $logger->expects(self::never())
+            ->method('info');
+        $logger->expects(self::never())
+            ->method('debug');
+
+        $uri  = 'test-uri';
+        $page = $this->createMock(PageInterface::class);
+
+        $config = [
+            'type' => 'uri',
+            'uri' => $uri,
+        ];
+
+        $helper = new ConvertToPages($logger, null);
+
+        [$page] = $helper->convert($config);
+
+        self::assertInstanceOf(\Laminas\Navigation\Page\Uri::class, $page);
+    }
+
+    /**
+     * @throws Exception
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     */
+    public function testConvertFromArray3(): void
+    {
+        $logger = $this->getMockBuilder(Logger::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $logger->expects(self::never())
+            ->method('emerg');
+        $logger->expects(self::never())
+            ->method('alert');
+        $logger->expects(self::never())
+            ->method('crit');
+        $logger->expects(self::never())
+            ->method('err');
+        $logger->expects(self::never())
+            ->method('warn');
+        $logger->expects(self::never())
+            ->method('notice');
+        $logger->expects(self::never())
+            ->method('info');
+        $logger->expects(self::never())
+            ->method('debug');
+
+        $uri = 'test-uri';
+
+        $config = [
+            'type' => 'uri',
+            'uri' => $uri,
+        ];
+
+        $helper = new ConvertToPages($logger, null);
+
+        [$page] = $helper->convert($config);
+
+        self::assertInstanceOf(\Laminas\Navigation\Page\Uri::class, $page);
     }
 
     /**
