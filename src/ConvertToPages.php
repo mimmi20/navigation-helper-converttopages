@@ -57,7 +57,7 @@ final class ConvertToPages implements ConvertToPagesInterface
             return [$mixed];
         }
 
-        if ($mixed instanceof ContainerInterface) {
+        if ($mixed instanceof ContainerInterface || $mixed instanceof AbstractContainer) {
             // value is a container; return pages in it
             $pages = [];
 

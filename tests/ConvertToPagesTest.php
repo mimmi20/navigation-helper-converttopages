@@ -14,6 +14,7 @@ namespace Mimmi20Test\NavigationHelper\ConvertToPages;
 
 use Laminas\Config\Config;
 use Laminas\Log\Logger;
+use Laminas\Navigation\Page\AbstractPage;
 use Mezzio\Navigation\Exception\InvalidArgumentException;
 use Mezzio\Navigation\Navigation;
 use Mezzio\Navigation\Page\PageFactoryInterface;
@@ -71,6 +72,42 @@ final class ConvertToPagesTest extends TestCase
      * @throws Exception
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     */
+    public function testConvertFromPage2(): void
+    {
+        $logger = $this->getMockBuilder(Logger::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $logger->expects(self::never())
+            ->method('emerg');
+        $logger->expects(self::never())
+            ->method('alert');
+        $logger->expects(self::never())
+            ->method('crit');
+        $logger->expects(self::never())
+            ->method('err');
+        $logger->expects(self::never())
+            ->method('warn');
+        $logger->expects(self::never())
+            ->method('notice');
+        $logger->expects(self::never())
+            ->method('info');
+        $logger->expects(self::never())
+            ->method('debug');
+
+        $helper = new ConvertToPages($logger, null);
+
+        $page = $this->createMock(AbstractPage::class);
+
+        self::assertSame([$page], $helper->convert($page));
+        self::assertSame([$page], $helper->convert($page, true));
+        self::assertSame([$page], $helper->convert($page, false));
+    }
+
+    /**
+     * @throws Exception
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
      * @throws InvalidArgumentException
      */
     public function testConvertFromContainer(): void
@@ -107,6 +144,48 @@ final class ConvertToPagesTest extends TestCase
         $page2 = new Uri();
 
         $container = new Navigation();
+        $container->addPage($page1);
+        $container->addPage($page2);
+
+        self::assertSame([$page1, $page2], $helper->convert($container));
+        self::assertSame([$page1, $page2], $helper->convert($container, true));
+        self::assertSame([$page1, $page2], $helper->convert($container, false));
+    }
+
+    /**
+     * @throws Exception
+     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws \Laminas\Navigation\Exception\InvalidArgumentException
+     */
+    public function testConvertFromContainer2(): void
+    {
+        $logger = $this->getMockBuilder(Logger::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $logger->expects(self::never())
+            ->method('emerg');
+        $logger->expects(self::never())
+            ->method('alert');
+        $logger->expects(self::never())
+            ->method('crit');
+        $logger->expects(self::never())
+            ->method('err');
+        $logger->expects(self::never())
+            ->method('warn');
+        $logger->expects(self::never())
+            ->method('notice');
+        $logger->expects(self::never())
+            ->method('info');
+        $logger->expects(self::never())
+            ->method('debug');
+
+        $helper = new ConvertToPages($logger, null);
+
+        $page1 = new \Laminas\Navigation\Page\Uri();
+        $page2 = new \Laminas\Navigation\Page\Uri();
+
+        $container = new \Laminas\Navigation\Navigation();
         $container->addPage($page1);
         $container->addPage($page2);
 
