@@ -10,11 +10,18 @@ parameters:
     - %currentWorkingDirectory%/vendor/autoload.php
     - %currentWorkingDirectory%/vendor/squizlabs/php_codesniffer/autoload.php
     - %currentWorkingDirectory%/vendor/squizlabs/php_codesniffer/src/Util/Tokens.php
-  exceptionRules:
-    reportUnusedCatchesOfUncheckedExceptions: true
-    uncheckedExceptions: []
   checkMissingIterableValueType: false
+  implicitThrows: false
+  exceptions:
+    checkedExceptionRegexes:
+      - '#Exception#'
+      - '#Throwable#'
+    check:
+      missingCheckedExceptionInThrows: true
+      tooWideThrowType: true
+
   excludes_analyse:
     - */tests/*/data/*
-#  ignoreErrors:
-#    - '~MockObject~'
+  ignoreErrors:
+    - '~is not subtype of Throwable~'
+    - '~Parameter .* of (method|function) .* expects .*, .* given~'
