@@ -10,7 +10,9 @@ parameters:
     - %currentWorkingDirectory%/vendor/autoload.php
     - %currentWorkingDirectory%/vendor/squizlabs/php_codesniffer/autoload.php
     - %currentWorkingDirectory%/vendor/squizlabs/php_codesniffer/src/Util/Tokens.php
+  checkGenericClassInNonGenericObjectType: false
   checkMissingIterableValueType: false
+  treatPhpDocTypesAsCertain: false
   implicitThrows: false
   exceptions:
     checkedExceptionRegexes:
@@ -19,9 +21,6 @@ parameters:
     check:
       missingCheckedExceptionInThrows: true
       tooWideThrowType: true
-
-  excludes_analyse:
-    - */tests/*/data/*
   ignoreErrors:
     - '~is not subtype of Throwable~'
     - '~Parameter .* of (method|function) .* expects .*, .* given~'
