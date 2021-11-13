@@ -30,9 +30,7 @@
     "phpunit/phpunit": "^9.5.10"
   },
   "suggest": {
-    "ext-intl": "required to use the Translator",
     "laminas/laminas-config": "to provide page configuration (optional, as arrays and Traversables are also allowed)",
-    "laminas/laminas-i18n": "Required to use the Translator",
     "laminas/laminas-navigation": "Required to use with Laminas",
     "laminas/laminas-servicemanager": "Required to use the navigation factories",
     "mimmi20/mezzio-navigation": "Required to use with Mezzio"
