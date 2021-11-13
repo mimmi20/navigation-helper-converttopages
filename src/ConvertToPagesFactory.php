@@ -17,6 +17,8 @@ use Laminas\Log\Logger;
 use Mezzio\Navigation\Page\PageFactoryInterface;
 use Psr\Container\ContainerExceptionInterface;
 
+use function assert;
+
 final class ConvertToPagesFactory
 {
     /**
@@ -30,11 +32,14 @@ final class ConvertToPagesFactory
 
         if ($container->has(PageFactoryInterface::class)) {
             $pageFactory = $container->get(PageFactoryInterface::class);
+
+            assert($pageFactory instanceof PageFactoryInterface);
         }
 
-        return new ConvertToPages(
-            $container->get(Logger::class),
-            $pageFactory
-        );
+        $logger = $container->get(Logger::class);
+
+        assert($logger instanceof Logger);
+
+        return new ConvertToPages($logger, $pageFactory);
     }
 }
