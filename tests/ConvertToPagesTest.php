@@ -684,7 +684,6 @@ final class ConvertToPagesTest extends TestCase
     /**
      * @throws Exception
      * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
-     *
      */
     #[\PHPUnit\Framework\Attributes\Group('Convert')]
     public function testConvertFromRecursiveArray(): void
