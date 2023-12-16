@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/navigation-helper-converttopages package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,19 +17,21 @@ use Laminas\Navigation\Page\AbstractPage;
 use Laminas\Stdlib\Exception\InvalidArgumentException;
 use Mezzio\Navigation\ContainerInterface;
 use Mezzio\Navigation\Page\PageInterface;
-use Traversable;
 
 interface ConvertToPagesInterface
 {
     /**
      * Converts a $mixed value to an array of pages
      *
-     * @param AbstractContainer|AbstractPage|array<int|string, array<string>|string>|ContainerInterface|int|PageInterface|string|Traversable $mixed     mixed value to get page(s) from
-     * @param bool                                                                                                                           $recursive whether $value should be looped if it is an array or a config
+     * @param AbstractContainer<AbstractPage>|AbstractPage|ContainerInterface|int|iterable<int|string, array<string>|string>|PageInterface|string $mixed     mixed value to get page(s) from
+     * @param bool                                                                                                                                $recursive whether $value should be looped if it is an array or a config
      *
-     * @return array<int, AbstractPage|PageInterface>
+     * @return array<int|string, AbstractPage|PageInterface>
      *
      * @throws InvalidArgumentException
      */
-    public function convert($mixed, bool $recursive = true): array;
+    public function convert(
+        AbstractContainer | AbstractPage | iterable | ContainerInterface | int | PageInterface | string $mixed,
+        bool $recursive = true,
+    ): array;
 }
