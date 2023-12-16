@@ -20,6 +20,7 @@ use Mezzio\Navigation\Page\PageFactoryInterface;
 use Mezzio\Navigation\Page\PageInterface;
 use Mezzio\Navigation\Page\Uri;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPages;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -685,7 +686,7 @@ final class ConvertToPagesTest extends TestCase
      * @throws Exception
      * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
      */
-    #[\PHPUnit\Framework\Attributes\Group('Convert')]
+    #[Group('Convert')]
     public function testConvertFromRecursiveArray(): void
     {
         $logger = $this->getMockBuilder(LoggerInterface::class)
