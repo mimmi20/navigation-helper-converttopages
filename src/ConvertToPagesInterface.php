@@ -23,7 +23,7 @@ interface ConvertToPagesInterface
     /**
      * Converts a $mixed value to an array of pages
      *
-     * @param AbstractContainer<AbstractPage>|AbstractPage|ContainerInterface|int|iterable<iterable<string>|string>|PageInterface|string $mixed     mixed value to get page(s) from
+     * @param AbstractContainer<AbstractPage>|AbstractPage|ContainerInterface<PageInterface>|int|iterable<iterable<string>|string>|PageInterface|string $mixed     mixed value to get page(s) from
      * @param bool                                                                                                                       $recursive whether $value should be looped if it is an array or a config
      *
      * @return array<int|string, AbstractPage|PageInterface>
