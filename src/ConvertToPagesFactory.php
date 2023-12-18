@@ -12,7 +12,7 @@ declare(strict_types = 1);
 
 namespace Mimmi20\NavigationHelper\ConvertToPages;
 
-use Mezzio\Navigation\Page\PageFactoryInterface;
+use Mimmi20\Mezzio\Navigation\Page\PageFactoryInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;

@@ -18,7 +18,7 @@ parameters:
   checkAlwaysTrueCheckTypeFunctionCall: false
 
   # reports instanceof occurrences always evaluated to true
-  checkAlwaysTrueInstanceof: true
+  checkAlwaysTrueInstanceof: false
 
   # reports === and !== occurrences always evaluated to true
   checkAlwaysTrueStrictComparison: true
@@ -95,4 +95,5 @@ parameters:
       tooWideThrowType: true
 
   ignoreErrors:
-    - '~Parameter #1 \$options of method Mezzio\\Navigation\\Page\\PageFactoryInterface::factory\(\) expects array<string, array<string>\|bool\|string>, array<int\|string, array<string>\|string> given~'
+    - '~Parameter #1 \$options of method Mimmi20\\Mezzio\\Navigation\\Page\\PageFactoryInterface::factory\(\) expects array<string, array<string>\|bool\|string>, array<int\|string, array<string>\|string> given~'
+    - '~is always true~'

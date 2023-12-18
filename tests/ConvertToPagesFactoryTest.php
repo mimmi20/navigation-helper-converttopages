@@ -12,7 +12,7 @@ declare(strict_types = 1);
 
 namespace Mimmi20Test\NavigationHelper\ConvertToPages;
 
-use Mezzio\Navigation\Page\PageFactoryInterface;
+use Mimmi20\Mezzio\Navigation\Page\PageFactoryInterface;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPages;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesFactory;
 use PHPUnit\Framework\Exception;

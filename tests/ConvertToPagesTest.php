@@ -14,11 +14,11 @@ namespace Mimmi20Test\NavigationHelper\ConvertToPages;
 
 use Laminas\Config\Config;
 use Laminas\Navigation\Page\AbstractPage;
-use Mezzio\Navigation\Exception\InvalidArgumentException;
-use Mezzio\Navigation\Navigation;
-use Mezzio\Navigation\Page\PageFactoryInterface;
-use Mezzio\Navigation\Page\PageInterface;
-use Mezzio\Navigation\Page\Uri;
+use Mimmi20\Mezzio\Navigation\Exception\InvalidArgumentException;
+use Mimmi20\Mezzio\Navigation\Navigation;
+use Mimmi20\Mezzio\Navigation\Page\PageFactoryInterface;
+use Mimmi20\Mezzio\Navigation\Page\PageInterface;
+use Mimmi20\Mezzio\Navigation\Page\Uri;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPages;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Exception;
