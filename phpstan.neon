@@ -95,5 +95,5 @@ parameters:
       tooWideThrowType: true
 
   ignoreErrors:
-    - '~Parameter #1 \$options of method Mimmi20\\Mezzio\\Navigation\\Page\\PageFactoryInterface::factory\(\) expects array<string, array<string>\|bool\|string>, array<int\|string, array<string>\|string> given~'
+    - '~Parameter #1 \$options of method Mimmi20\\Mezzio\\Navigation\\Page\\PageFactoryInterface::factory\(\) expects array<string, array<string>\|bool\|string>, array<iterable<string>\|string> given~'
     - '~is always true~'
