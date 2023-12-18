@@ -15,10 +15,10 @@ namespace Mimmi20\NavigationHelper\ConvertToPages;
 use Laminas\Navigation\AbstractContainer;
 use Laminas\Navigation\Page\AbstractPage;
 use Laminas\Stdlib\ArrayUtils;
-use Mezzio\Navigation\ContainerInterface;
-use Mezzio\Navigation\Exception\InvalidArgumentException;
-use Mezzio\Navigation\Page\PageFactoryInterface;
-use Mezzio\Navigation\Page\PageInterface;
+use Mimmi20\Mezzio\Navigation\ContainerInterface;
+use Mimmi20\Mezzio\Navigation\Exception\InvalidArgumentException;
+use Mimmi20\Mezzio\Navigation\Page\PageFactoryInterface;
+use Mimmi20\Mezzio\Navigation\Page\PageInterface;
 use Psr\Log\LoggerInterface;
 use Traversable;
 
