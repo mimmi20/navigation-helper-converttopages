@@ -102,7 +102,7 @@ final class ConvertToPages implements ConvertToPagesInterface
                 // first key is numeric; assume several pages
                 return array_map(
                     /** @return AbstractPage|PageInterface */
-                    function ($value) {
+                    function (AbstractContainer | AbstractPage | iterable | ContainerInterface | int | PageInterface | string $value) {
                         [$page] = $this->convert($value, false);
 
                         return $page;
