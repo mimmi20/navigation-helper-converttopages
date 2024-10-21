@@ -25,7 +25,7 @@
     "infection/infection": "^0.27.11 || ^0.28.1",
     "laminas/laminas-config": "^3.9.0",
     "laminas/laminas-modulemanager": "^2.16.0",
-    "laminas/laminas-navigation": "^2.19.1",
+    "laminas/laminas-navigation": "^2.20.0",
     "laminas/laminas-permissions-acl": "^2.16.0",
     "laminas/laminas-servicemanager": "^3.22.1 || ^4.0.0",
     "mimmi20/coding-standard": "^5.2.44",
