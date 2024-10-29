@@ -10,8 +10,7 @@ updates:
     directory: "/"
 
     schedule:
-      interval: "weekly"
-      day: "wednesday"
+      interval: "daily"
       time: "04:00"
       timezone: "Europe/Berlin"
 
@@ -67,8 +66,7 @@ updates:
     directory: "/"
 
     schedule:
-      interval: "weekly"
-      day: "wednesday"
+      interval: "daily"
       time: "04:00"
       timezone: "Europe/Berlin"
 
@@ -87,5 +85,8 @@ updates:
 
     commit-message:
       prefix: "github-actions"
+
+    ignore:
+      - dependency-name: "mimmi20/ci"
 
     rebase-strategy: "auto"
