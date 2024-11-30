@@ -176,6 +176,38 @@ final class ConvertToPagesTest extends TestCase
      * @throws Exception
      * @throws InvalidArgumentException
      */
+    public function testConvertFromStringWithException2(): void
+    {
+        $exception = new \Laminas\Navigation\Exception\InvalidArgumentException('test');
+
+        $uri = 'test-uri';
+
+        $pageFactory = $this->getMockBuilder(PageFactoryInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $pageFactory->expects(self::once())
+            ->method('factory')
+            ->with(
+                [
+                    'type' => 'uri',
+                    'uri' => $uri,
+                ],
+            )
+            ->willThrowException($exception);
+
+        $helper = new ConvertToPages($pageFactory);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('test');
+        $this->expectExceptionCode(0);
+
+        $helper->convert($uri);
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
     public function testConvertFromString2(): void
     {
         $uri    = 'test-uri';
@@ -238,6 +270,39 @@ final class ConvertToPagesTest extends TestCase
     public function testConvertFromConfigWithException(): void
     {
         $exception = new InvalidArgumentException('test');
+
+        $uri = 'test-uri';
+
+        $configArray = [
+            'type' => 'uri',
+            'uri' => $uri,
+        ];
+        $config      = new ArrayObject($configArray);
+
+        $pageFactory = $this->getMockBuilder(PageFactoryInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $pageFactory->expects(self::once())
+            ->method('factory')
+            ->with($configArray)
+            ->willThrowException($exception);
+
+        $helper = new ConvertToPages($pageFactory);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('test');
+        $this->expectExceptionCode(0);
+
+        self::assertSame([], $helper->convert($config));
+    }
+
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
+    public function testConvertFromConfigWithException2(): void
+    {
+        $exception = new \Laminas\Navigation\Exception\InvalidArgumentException('test');
 
         $uri = 'test-uri';
 
