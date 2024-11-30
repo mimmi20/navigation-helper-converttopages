@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the mimmi20/navigation-helper-converttopages package.
  *
@@ -12,7 +13,7 @@ declare(strict_types = 1);
 
 namespace Mimmi20Test\NavigationHelper\ConvertToPages;
 
-use Laminas\Config\Config;
+use ArrayObject;
 use Laminas\Navigation\Page\AbstractPage;
 use Mimmi20\Mezzio\Navigation\Exception\InvalidArgumentException;
 use Mimmi20\Mezzio\Navigation\Navigation;
@@ -23,43 +24,22 @@ use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPages;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
 
 final class ConvertToPagesTest extends TestCase
 {
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromPage(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $pageFactory = $this->getMockBuilder(PageFactoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $pageFactory->expects(self::never())
             ->method('factory');
 
-        $helper = new ConvertToPages($logger, $pageFactory);
+        $helper = new ConvertToPages($pageFactory);
 
         $page = $this->createMock(PageInterface::class);
 
@@ -70,31 +50,11 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromPage2(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
-        $helper = new ConvertToPages($logger, null);
+        $helper = new ConvertToPages(null);
 
         $page = $this->createMock(AbstractPage::class);
 
@@ -105,38 +65,18 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      * @throws InvalidArgumentException
      */
     public function testConvertFromContainer(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $pageFactory = $this->getMockBuilder(PageFactoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $pageFactory->expects(self::never())
             ->method('factory');
 
-        $helper = new ConvertToPages($logger, $pageFactory);
+        $helper = new ConvertToPages($pageFactory);
 
         $page1 = new Uri();
         $page2 = new Uri();
@@ -152,32 +92,12 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      * @throws \Laminas\Navigation\Exception\InvalidArgumentException
      */
     public function testConvertFromContainer2(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
-        $helper = new ConvertToPages($logger, null);
+        $helper = new ConvertToPages(null);
 
         $page1 = new \Laminas\Navigation\Page\Uri();
         $page2 = new \Laminas\Navigation\Page\Uri();
@@ -193,30 +113,10 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromString(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $uri  = 'test-uri';
         $page = $this->createMock(PageInterface::class);
 
@@ -233,7 +133,7 @@ final class ConvertToPagesTest extends TestCase
             )
             ->willReturn($page);
 
-        $helper = new ConvertToPages($logger, $pageFactory);
+        $helper = new ConvertToPages($pageFactory);
 
         self::assertSame([$page], $helper->convert($uri));
         self::assertSame([$page], $helper->convert($uri, true));
@@ -242,39 +142,18 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromStringWithException(): void
     {
         $exception = new InvalidArgumentException('test');
-
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::exactly(3))
-            ->method('error')
-            ->with($exception);
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
 
         $uri = 'test-uri';
 
         $pageFactory = $this->getMockBuilder(PageFactoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $pageFactory->expects(self::exactly(3))
+        $pageFactory->expects(self::once())
             ->method('factory')
             ->with(
                 [
@@ -284,41 +163,23 @@ final class ConvertToPagesTest extends TestCase
             )
             ->willThrowException($exception);
 
-        $helper = new ConvertToPages($logger, $pageFactory);
+        $helper = new ConvertToPages($pageFactory);
 
-        self::assertSame([], $helper->convert($uri));
-        self::assertSame([], $helper->convert($uri, true));
-        self::assertSame([], $helper->convert($uri, false));
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('test');
+        $this->expectExceptionCode(0);
+
+        $helper->convert($uri);
     }
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromString2(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $uri    = 'test-uri';
-        $helper = new ConvertToPages($logger, null);
+        $helper = new ConvertToPages(null);
 
         [$page] = $helper->convert($uri);
 
@@ -327,33 +188,13 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromString3(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $uri = 'test-uri';
 
-        $helper = new ConvertToPages($logger, null);
+        $helper = new ConvertToPages(null);
 
         [$page] = $helper->convert($uri);
 
@@ -362,30 +203,10 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromConfig(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $uri  = 'test-uri';
         $page = $this->createMock(PageInterface::class);
 
@@ -393,7 +214,7 @@ final class ConvertToPagesTest extends TestCase
             'type' => 'uri',
             'uri' => $uri,
         ];
-        $config      = new Config($configArray);
+        $config      = new ArrayObject($configArray);
 
         $pageFactory = $this->getMockBuilder(PageFactoryInterface::class)
             ->disableOriginalConstructor()
@@ -403,7 +224,7 @@ final class ConvertToPagesTest extends TestCase
             ->with($configArray)
             ->willReturn($page);
 
-        $helper = new ConvertToPages($logger, $pageFactory);
+        $helper = new ConvertToPages($pageFactory);
 
         self::assertSame([$page], $helper->convert($config));
         self::assertSame([$page], $helper->convert($config, true));
@@ -412,32 +233,11 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromConfigWithException(): void
     {
         $exception = new InvalidArgumentException('test');
-
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::exactly(3))
-            ->method('error')
-            ->with($exception);
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
 
         $uri = 'test-uri';
 
@@ -445,56 +245,38 @@ final class ConvertToPagesTest extends TestCase
             'type' => 'uri',
             'uri' => $uri,
         ];
-        $config      = new Config($configArray);
+        $config      = new ArrayObject($configArray);
 
         $pageFactory = $this->getMockBuilder(PageFactoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $pageFactory->expects(self::exactly(3))
+        $pageFactory->expects(self::once())
             ->method('factory')
             ->with($configArray)
             ->willThrowException($exception);
 
-        $helper = new ConvertToPages($logger, $pageFactory);
+        $helper = new ConvertToPages($pageFactory);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('test');
+        $this->expectExceptionCode(0);
 
         self::assertSame([], $helper->convert($config));
-        self::assertSame([], $helper->convert($config, true));
-        self::assertSame([], $helper->convert($config, false));
     }
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromInteger(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $pageFactory = $this->getMockBuilder(PageFactoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $pageFactory->expects(self::never())
             ->method('factory');
 
-        $helper = new ConvertToPages($logger, $pageFactory);
+        $helper = new ConvertToPages($pageFactory);
 
         self::assertSame([], $helper->convert(1));
         self::assertSame([], $helper->convert(1, true));
@@ -503,30 +285,10 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromArray(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $uri  = 'test-uri';
         $page = $this->createMock(PageInterface::class);
 
@@ -543,7 +305,7 @@ final class ConvertToPagesTest extends TestCase
             ->with($config)
             ->willReturn($page);
 
-        $helper = new ConvertToPages($logger, $pageFactory);
+        $helper = new ConvertToPages($pageFactory);
 
         self::assertSame([$page], $helper->convert($config));
         self::assertSame([$page], $helper->convert($config, true));
@@ -552,32 +314,11 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromArrayWithException(): void
     {
         $exception = new InvalidArgumentException('test');
-
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::exactly(3))
-            ->method('error')
-            ->with($exception);
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
 
         $uri = 'test-uri';
 
@@ -589,44 +330,26 @@ final class ConvertToPagesTest extends TestCase
         $pageFactory = $this->getMockBuilder(PageFactoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $pageFactory->expects(self::exactly(3))
+        $pageFactory->expects(self::once())
             ->method('factory')
             ->with($config)
             ->willThrowException($exception);
 
-        $helper = new ConvertToPages($logger, $pageFactory);
+        $helper = new ConvertToPages($pageFactory);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('test');
+        $this->expectExceptionCode(0);
 
         self::assertSame([], $helper->convert($config));
-        self::assertSame([], $helper->convert($config, true));
-        self::assertSame([], $helper->convert($config, false));
     }
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromArray2(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $uri  = 'test-uri';
         $page = $this->createMock(PageInterface::class);
 
@@ -635,7 +358,7 @@ final class ConvertToPagesTest extends TestCase
             'uri' => $uri,
         ];
 
-        $helper = new ConvertToPages($logger, null);
+        $helper = new ConvertToPages(null);
 
         [$page] = $helper->convert($config);
 
@@ -644,30 +367,10 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testConvertFromArray3(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $uri = 'test-uri';
 
         $config = [
@@ -675,7 +378,7 @@ final class ConvertToPagesTest extends TestCase
             'uri' => $uri,
         ];
 
-        $helper = new ConvertToPages($logger, null);
+        $helper = new ConvertToPages(null);
 
         [$page] = $helper->convert($config);
 
@@ -684,31 +387,11 @@ final class ConvertToPagesTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     #[Group('Convert')]
     public function testConvertFromRecursiveArray(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $logger->expects(self::never())
-            ->method('emergency');
-        $logger->expects(self::never())
-            ->method('alert');
-        $logger->expects(self::never())
-            ->method('critical');
-        $logger->expects(self::never())
-            ->method('error');
-        $logger->expects(self::never())
-            ->method('warning');
-        $logger->expects(self::never())
-            ->method('notice');
-        $logger->expects(self::never())
-            ->method('info');
-        $logger->expects(self::never())
-            ->method('debug');
-
         $uri1  = 'test-uri1';
         $uri2  = 'test-uri2';
         $page1 = $this->createMock(PageInterface::class);
@@ -746,7 +429,7 @@ final class ConvertToPagesTest extends TestCase
                 },
             );
 
-        $helper = new ConvertToPages($logger, $pageFactory);
+        $helper = new ConvertToPages($pageFactory);
 
         self::assertSame([$page1, $page2], $helper->convert($config));
         self::assertSame([$page1, $page2], $helper->convert($config, true));

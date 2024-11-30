@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the mimmi20/navigation-helper-converttopages package.
  *
@@ -15,11 +16,11 @@ namespace Mimmi20Test\NavigationHelper\ConvertToPages;
 use Mimmi20\Mezzio\Navigation\Page\PageFactoryInterface;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPages;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesFactory;
+use Override;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
-use Psr\Log\LoggerInterface;
 
 use function assert;
 
@@ -28,6 +29,7 @@ final class ConvertToPagesFactoryTest extends TestCase
     private ConvertToPagesFactory $factory;
 
     /** @throws void */
+    #[Override]
     protected function setUp(): void
     {
         $this->factory = new ConvertToPagesFactory();
@@ -39,15 +41,11 @@ final class ConvertToPagesFactoryTest extends TestCase
      */
     public function testInvocation(): void
     {
-        $logger = $this->createMock(LoggerInterface::class);
-
         $container = $this->getMockBuilder(ContainerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $container->expects(self::once())
-            ->method('get')
-            ->with(LoggerInterface::class)
-            ->willReturn($logger);
+        $container->expects(self::never())
+            ->method('get');
         $container->expects(self::once())
             ->method('has')
             ->with(PageFactoryInterface::class)
@@ -65,28 +63,15 @@ final class ConvertToPagesFactoryTest extends TestCase
      */
     public function testInvocation2(): void
     {
-        $logger      = $this->createMock(LoggerInterface::class);
         $pageFactory = $this->createMock(PageFactoryInterface::class);
 
         $container = $this->getMockBuilder(ContainerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $matcher   = self::exactly(2);
-        $container->expects($matcher)
+        $container->expects(self::once())
             ->method('get')
-            ->willReturnCallback(
-                static function (string $id) use ($matcher, $pageFactory, $logger): mixed {
-                    match ($matcher->numberOfInvocations()) {
-                        1 => self::assertSame(PageFactoryInterface::class, $id),
-                        default => self::assertSame(LoggerInterface::class, $id),
-                    };
-
-                    return match ($matcher->numberOfInvocations()) {
-                        1 => $pageFactory,
-                        default => $logger,
-                    };
-                },
-            );
+            ->with(PageFactoryInterface::class)
+            ->willReturn($pageFactory);
         $container->expects(self::once())
             ->method('has')
             ->with(PageFactoryInterface::class)

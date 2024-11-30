@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the mimmi20/navigation-helper-converttopages package.
  *
@@ -15,6 +16,7 @@ namespace Mimmi20Test\NavigationHelper\ConvertToPages;
 use Mimmi20\NavigationHelper\ConvertToPages\ConfigProvider;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPages;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesInterface;
+use Override;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 
@@ -23,6 +25,7 @@ final class ConfigProviderTest extends TestCase
     private ConfigProvider $provider;
 
     /** @throws void */
+    #[Override]
     protected function setUp(): void
     {
         $this->provider = new ConfigProvider();

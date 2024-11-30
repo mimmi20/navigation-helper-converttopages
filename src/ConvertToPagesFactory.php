@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the mimmi20/navigation-helper-converttopages package.
  *
@@ -15,7 +16,6 @@ namespace Mimmi20\NavigationHelper\ConvertToPages;
 use Mimmi20\Mezzio\Navigation\Page\PageFactoryInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
-use Psr\Log\LoggerInterface;
 
 use function assert;
 
@@ -36,10 +36,6 @@ final class ConvertToPagesFactory
             assert($pageFactory instanceof PageFactoryInterface);
         }
 
-        $logger = $container->get(LoggerInterface::class);
-
-        assert($logger instanceof LoggerInterface);
-
-        return new ConvertToPages($logger, $pageFactory);
+        return new ConvertToPages($pageFactory);
     }
 }

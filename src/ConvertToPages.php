@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the mimmi20/navigation-helper-converttopages package.
  *
@@ -19,7 +20,7 @@ use Mimmi20\Mezzio\Navigation\ContainerInterface;
 use Mimmi20\Mezzio\Navigation\Exception\InvalidArgumentException;
 use Mimmi20\Mezzio\Navigation\Page\PageFactoryInterface;
 use Mimmi20\Mezzio\Navigation\Page\PageInterface;
-use Psr\Log\LoggerInterface;
+use Override;
 use Traversable;
 
 use function array_map;
@@ -29,13 +30,11 @@ use function is_numeric;
 use function is_string;
 use function key;
 
-final class ConvertToPages implements ConvertToPagesInterface
+final readonly class ConvertToPages implements ConvertToPagesInterface
 {
     /** @throws void */
-    public function __construct(
-        private readonly LoggerInterface $logger,
-        private readonly PageFactoryInterface | null $pageFactory,
-    ) {
+    public function __construct(private PageFactoryInterface | null $pageFactory)
+    {
         // nothing to do
     }
 
@@ -47,8 +46,9 @@ final class ConvertToPages implements ConvertToPagesInterface
      *
      * @return array<int|string, AbstractPage|PageInterface>
      *
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
+    #[Override]
     public function convert(
         AbstractContainer | AbstractPage | iterable | ContainerInterface | int | PageInterface | string $mixed,
         bool $recursive = true,
@@ -86,15 +86,17 @@ final class ConvertToPages implements ConvertToPagesInterface
                 );
 
                 return [$page];
-            } catch (InvalidArgumentException | \Laminas\Navigation\Exception\InvalidArgumentException $e) {
-                $this->logger->error($e);
-
-                return [];
+            } catch (\Laminas\Navigation\Exception\InvalidArgumentException $e) {
+                throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
             }
         }
 
         if ($mixed instanceof Traversable) {
-            $mixed = ArrayUtils::iteratorToArray($mixed);
+            try {
+                $mixed = ArrayUtils::iteratorToArray($mixed);
+            } catch (\Laminas\Stdlib\Exception\InvalidArgumentException $e) {
+                throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+            }
         }
 
         if (is_array($mixed) && $mixed !== []) {
@@ -116,8 +118,8 @@ final class ConvertToPages implements ConvertToPagesInterface
                 $page = $this->pageFactory?->factory($mixed) ?? AbstractPage::factory($mixed);
 
                 return [$page];
-            } catch (InvalidArgumentException | \Laminas\Navigation\Exception\InvalidArgumentException $e) {
-                $this->logger->error($e);
+            } catch (\Laminas\Navigation\Exception\InvalidArgumentException $e) {
+                throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
             }
         }
 
