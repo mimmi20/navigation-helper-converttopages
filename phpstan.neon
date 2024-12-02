@@ -120,7 +120,7 @@ parameters:
     narrow_param: true
 
   ignoreErrors:
-    - '~Parameter #1 \$options of method Mimmi20\\Mezzio\\Navigation\\Page\\PageFactoryInterface::factory\(\) expects array<string, array<string>\|bool\|string>, array<iterable<string>\|string> given~'
+    - '~Parameter #1 \$options of method Mimmi20\\Mezzio\\Navigation\\Page\\PageFactoryInterface::factory\(\) expects array<string, array<string, string>\|bool\|string>, array<iterable<string>\|string> given~'
 
 rules:
   # code complexity
