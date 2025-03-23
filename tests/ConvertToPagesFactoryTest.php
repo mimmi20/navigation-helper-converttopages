@@ -16,7 +16,7 @@ namespace Mimmi20Test\NavigationHelper\ConvertToPages;
 use Mimmi20\Mezzio\Navigation\Page\PageFactoryInterface;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPages;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesFactory;
-use Override;
+use PHPUnit\Event\NoPreviousThrowableException;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
@@ -26,15 +26,6 @@ use function assert;
 
 final class ConvertToPagesFactoryTest extends TestCase
 {
-    private ConvertToPagesFactory $factory;
-
-    /** @throws void */
-    #[Override]
-    protected function setUp(): void
-    {
-        $this->factory = new ConvertToPagesFactory();
-    }
-
     /**
      * @throws Exception
      * @throws ContainerExceptionInterface
@@ -52,7 +43,7 @@ final class ConvertToPagesFactoryTest extends TestCase
             ->willReturn(false);
 
         assert($container instanceof ContainerInterface);
-        $helper = ($this->factory)($container);
+        $helper = (new ConvertToPagesFactory())($container);
 
         self::assertInstanceOf(ConvertToPages::class, $helper);
     }
@@ -60,6 +51,8 @@ final class ConvertToPagesFactoryTest extends TestCase
     /**
      * @throws Exception
      * @throws ContainerExceptionInterface
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testInvocation2(): void
     {
@@ -78,7 +71,7 @@ final class ConvertToPagesFactoryTest extends TestCase
             ->willReturn(true);
 
         assert($container instanceof ContainerInterface);
-        $helper = ($this->factory)($container);
+        $helper = (new ConvertToPagesFactory())($container);
 
         self::assertInstanceOf(ConvertToPages::class, $helper);
     }

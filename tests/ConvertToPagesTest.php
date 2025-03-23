@@ -21,6 +21,7 @@ use Mimmi20\Mezzio\Navigation\Page\PageFactoryInterface;
 use Mimmi20\Mezzio\Navigation\Page\PageInterface;
 use Mimmi20\Mezzio\Navigation\Page\Uri;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPages;
+use PHPUnit\Event\NoPreviousThrowableException;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
@@ -30,6 +31,8 @@ final class ConvertToPagesTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testConvertFromPage(): void
     {
@@ -51,6 +54,8 @@ final class ConvertToPagesTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testConvertFromPage2(): void
     {
@@ -114,6 +119,8 @@ final class ConvertToPagesTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testConvertFromString(): void
     {
@@ -236,6 +243,8 @@ final class ConvertToPagesTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testConvertFromConfig(): void
     {
@@ -351,6 +360,8 @@ final class ConvertToPagesTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testConvertFromArray(): void
     {
@@ -412,6 +423,8 @@ final class ConvertToPagesTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testConvertFromArray2(): void
     {
@@ -453,6 +466,8 @@ final class ConvertToPagesTest extends TestCase
     /**
      * @throws Exception
      * @throws InvalidArgumentException
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     #[Group('Convert')]
     public function testConvertFromRecursiveArray(): void
